@@ -22,9 +22,10 @@ services:
     image: apache/apisix:${APISIX_IMAGE_TAG:-3.16.0-debian}
     restart: always
     volumes:
-      - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
-    depends_on:
-      - etcd
+      - ./apisix_conf/config-standalone.yaml:/usr/local/apisix/conf/config.yaml:ro
+      - ./apisix_conf/routes.yaml:/usr/local/apisix/conf/apisix.yaml:ro
+    environment:
+      - APISIX_STAND_ALONE=true
     ##network_mode: host
     ports:
       - "9180:9180/tcp"
