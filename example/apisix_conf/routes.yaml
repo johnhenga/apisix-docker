@@ -34,4 +34,25 @@ routes:
           port: 80
           weight: 1
 
+  - id: 3
+    uri: /chat/message
+    plugins:
+      proxy-rewrite:
+        uri: "/topics/chat.events"
+    upstream:
+      type: roundrobin
+      nodes:
+        - host: redpanda
+          port: 8082
+          weight: 1
+
+  - id: 4
+    uri: /webhook/livechat
+    upstream:
+      type: roundrobin
+      nodes:
+        - host: gateway-service
+          port: 8000
+          weight: 1
+
 #END
