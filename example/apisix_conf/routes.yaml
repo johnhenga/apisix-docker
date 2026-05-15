@@ -16,35 +16,35 @@
 #
 
 routes:
-  - id: 1
-    uri: /web1/*
-    upstream:
-      type: roundrobin
-      nodes:
-        - host: web1
-          port: 80
-          weight: 1
+  # - id: 1
+  #   uri: /web1/*
+  #   upstream:
+  #     type: roundrobin
+  #     nodes:
+  #       - host: web1
+  #         port: 80
+  #         weight: 1
 
-  - id: 2
-    uri: /web2/*
-    upstream:
-      type: roundrobin
-      nodes:
-        - host: web2
-          port: 80
-          weight: 1
+  # - id: 2
+  #   uri: /web2/*
+  #   upstream:
+  #     type: roundrobin
+  #     nodes:
+  #       - host: web2
+  #         port: 80
+  #         weight: 1
 
-  - id: 3
-    uri: /chat/message
-    plugins:
-      proxy-rewrite:
-        uri: "/topics/chat.events"
-    upstream:
-      type: roundrobin
-      nodes:
-        - host: redpanda
-          port: 8082
-          weight: 1
+  # - id: 3
+  #   uri: /chat/message
+  #   plugins:
+  #     proxy-rewrite:
+  #       uri: "/topics/chat.events"
+  #   upstream:
+  #     type: roundrobin
+  #     nodes:
+  #       - host: redpanda
+  #         port: 8082
+  #         weight: 1
 
   - id: 4
     uri: /webhook/livechat
@@ -53,6 +53,15 @@ routes:
       nodes:
         - host: gateway-service
           port: 8000
+          weight: 1
+
+  - id: 5
+    uri: /webhook/cpall
+    upstream:
+      type: roundrobin
+      nodes:
+        - host: redpanda-connect
+          port: 4195
           weight: 1
 
 #END
