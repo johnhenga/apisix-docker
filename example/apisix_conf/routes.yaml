@@ -51,8 +51,8 @@ routes:
     upstream:
       type: roundrobin
       nodes:
-        - host: gateway-service
-          port: 8000
+        - host: escalation-router
+          port: 8003
           weight: 1
 
   - id: 5

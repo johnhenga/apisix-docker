@@ -18,6 +18,8 @@
 apisix:
   node_listen: 9080              # APISIX listening port
   enable_ipv6: false
+  dns_resolver:
+    - 127.0.0.11
 
 deployment:
   role: data_plane
